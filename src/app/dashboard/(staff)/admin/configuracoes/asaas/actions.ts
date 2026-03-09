@@ -250,7 +250,16 @@ export async function registerAsaasWebhook(webhookUrl: string) {
         const responseData = await response.json();
 
         const isSuccess = response.ok;
-        const msg = isSuccess ? "Registrado com sucesso" : (responseData.errors?.[0]?.description || "Erro ao registrar webhook");
+        
+        if (!isSuccess) {
+            console.error("Asaas Webhook Registration Error Detail:", {
+                status: response.status,
+                data: responseData,
+                payloadSent: { ...payload, authToken: '***' }
+            });
+        }
+
+        const msg = isSuccess ? "Registrado com sucesso" : (responseData.errors?.[0]?.description || `Erro ${response.status}: Falha ao registrar`);
 
         await supabase
             .from("payment_gateway_settings")
