@@ -1,26 +1,225 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Brand Colors - Blue (#004EEB) */
+  --color-brand-25: #f5f8ff;
+  --color-brand-50: #ebf1ff;
+  --color-brand-100: #d6e4ff;
+  --color-brand-200: #adc9ff;
+  --color-brand-300: #85afff;
+  --color-brand-400: #5c94ff;
+  --color-brand-500: #004eeb;
+  --color-brand-600: #003eb0;
+  --color-brand-700: #002e80;
+  --color-brand-800: #001f50;
+  --color-brand-900: #000f21;
+  --color-brand-950: #00070f;
+
+  /* Gray colors are handled via CSS variables for light/dark mode */
+  --color-gray-25: var(--gray-25);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+
+  /* Semantic Colors - Error */
+  --color-error-25: #fffbfa;
+  --color-error-50: #fef3f2;
+  --color-error-100: #fee4e2;
+  --color-error-200: #fecdca;
+  --color-error-300: #fda29b;
+  --color-error-400: #f97066;
+  --color-error-500: #f04438;
+  --color-error-600: #d92d20;
+  --color-error-700: #b42318;
+  --color-error-800: #912018;
+  --color-error-900: #7a271a;
+  --color-error-950: #55160c;
+
+  /* Semantic Colors - Warning */
+  --color-warning-25: #fffcf5;
+  --color-warning-50: #fffafb;
+  --color-warning-100: #fef0c7;
+  --color-warning-200: #fedf89;
+  --color-warning-300: #fec84b;
+  --color-warning-400: #fdb022;
+  --color-warning-500: #f79009;
+  --color-warning-600: #dc6803;
+  --color-warning-700: #b54708;
+  --color-warning-800: #93370d;
+  --color-warning-900: #7a2e0e;
+  --color-warning-950: #4e1d09;
+
+  /* Semantic Colors - Success */
+  --color-success-25: #f6fef9;
+  --color-success-50: #ecfdf3;
+  --color-success-100: #dcfae6;
+  --color-success-200: #abefc6;
+  --color-success-300: #75e0a7;
+  --color-success-400: #47cd89;
+  --color-success-500: #17b26a;
+  --color-success-600: #079455;
+  --color-success-700: #067647;
+  --color-success-800: #085d3a;
+  --color-success-900: #074d31;
+  --color-success-950: #053321;
+
+  /* Interactions */
+  --color-primary-hover: #003eb0;
+  --color-primary-active: #002e80;
+  --color-primary-focus: #adc9ff;
+
+  /* shadcn mapping */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.5rem;
+  /* Standardized radius */
+
+  /* Official Grays (Light Mode) */
+  --gray-25: #fcfcfd;
+  --gray-50: #f9fafb;
+  --gray-100: #f2f4f7;
+  --gray-200: #eaecf0;
+  --gray-300: #d0d5dd;
+  --gray-400: #98a2b3;
+  --gray-500: #667085;
+  --gray-600: #475467;
+  --gray-700: #344054;
+  --gray-800: #1d2939;
+  --gray-900: #101828;
+  --gray-950: #0c111d;
+
+  /* shadcn/ui base set (Light Mode) */
+  --background: #ffffff;
+  --foreground: var(--gray-900);
+  --card: #ffffff;
+  --card-foreground: var(--gray-900);
+  --popover: #ffffff;
+  --popover-foreground: var(--gray-900);
+  --primary: #004eeb;
+  --primary-foreground: #ffffff;
+  --secondary: var(--gray-100);
+  --secondary-foreground: var(--gray-900);
+  --muted: var(--gray-100);
+  --muted-foreground: var(--gray-500);
+  --accent: var(--gray-100);
+  --accent-foreground: var(--gray-900);
+  --destructive: #d92d20;
+  --destructive-foreground: #ffffff;
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: #adc9ff;
+  --sidebar: #fcfcfd;
+  --sidebar-foreground: var(--gray-700);
+  --sidebar-primary: #004eeb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--gray-100);
+  --sidebar-accent-foreground: var(--gray-900);
+  --sidebar-border: var(--gray-200);
+  --sidebar-ring: #adc9ff;
+}
+
+.dark {
+  /* Official Grays (Dark Mode) */
+  --gray-25: #101828;
+  --gray-50: #1d2939;
+  --gray-100: #344054;
+  --gray-200: #475467;
+  --gray-300: #667085;
+  --gray-400: #98a2b3;
+  --gray-500: #d0d5dd;
+  --gray-600: #eaecf0;
+  --gray-700: #f2f4f7;
+  --gray-800: #f9fafb;
+  --gray-900: #fcfcfd;
+  --gray-950: #ffffff;
+
+  /* shadcn/ui base set (Dark Mode) */
+  --background: #0c111d;
+  --foreground: #fcfcfd;
+  --card: #101828;
+  --card-foreground: #fcfcfd;
+  --popover: #0c111d;
+  --popover-foreground: #fcfcfd;
+  --primary: #004eeb;
+  --primary-foreground: #ffffff;
+  --secondary: #1d2939;
+  --secondary-foreground: #fcfcfd;
+  --muted: #1d2939;
+  --muted-foreground: #98a2b3;
+  --accent: #1d2939;
+  --accent-foreground: #fcfcfd;
+  --destructive: #f04438;
+  --destructive-foreground: #ffffff;
+  --border: #1d2939;
+  --input: #1d2939;
+  --ring: #004eeb;
+  --sidebar: #101828;
+  --sidebar-foreground: #fcfcfd;
+  --sidebar-primary: #004eeb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #1d2939;
+  --sidebar-accent-foreground: #fcfcfd;
+  --sidebar-border: #1d2939;
+  --sidebar-ring: #004eeb;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
 }
