@@ -217,6 +217,7 @@ export async function registerAsaasWebhook(webhookUrl: string) {
 
     try {
         const payload = {
+            name: "Competir.pay Webhook",
             url: webhookUrl,
             email: "admin@competir.pay", // Default or could be from env
             apiVersion: 3,
