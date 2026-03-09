@@ -47,8 +47,10 @@ export default function AsaasSettingsClient({ initialData }: { initialData: any 
     // Auto-generate webhook URL for preview, assuming current origin is what we want
     // In production, you might want this to be driven from env vars for the actual public domain
     const [webhookUrlPreview, setWebhookUrlPreview] = useState("");
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        setIsMounted(true);
         if (typeof window !== "undefined") {
             setWebhookUrlPreview(`${window.location.origin}/api/webhooks/asaas`);
         }
@@ -314,7 +316,7 @@ export default function AsaasSettingsClient({ initialData }: { initialData: any 
                             </div>
 
                             {/* Webhook events tracking from DB could go here */}
-                            {data.last_webhook_received_at && (
+                            {data.last_webhook_received_at && isMounted && (
                                 <div className="text-xs text-gray-500 mt-4 bg-gray-50 py-2 border-t border-gray-100">
                                     Último evento processado: {new Date(data.last_webhook_received_at).toLocaleString('pt-BR')} ({data.last_webhook_event})
                                 </div>
@@ -362,8 +364,8 @@ export default function AsaasSettingsClient({ initialData }: { initialData: any 
                                     {testResult.message && (
                                         <p className="text-gray-600 text-xs">{testResult.message}</p>
                                     )}
-                                    {data.last_connection_test_at && (
-                                        <p className="text-gray-400 text-xs mt-1 block">
+                                    {data.last_connection_test_at && isMounted && (
+                                        <p className="text-gray-400 text-xs mt-1 block" suppressHydrationWarning>
                                             Último teste: {new Date(data.last_connection_test_at).toLocaleString('pt-BR')}
                                         </p>
                                     )}
