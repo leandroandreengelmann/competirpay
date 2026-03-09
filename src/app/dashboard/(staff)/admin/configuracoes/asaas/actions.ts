@@ -219,7 +219,8 @@ export async function registerAsaasWebhook(webhookUrl: string) {
         const payload = {
             name: "Competir.pay Webhook",
             url: webhookUrl,
-            email: "admin@competir.pay", // Default or could be from env
+            email: "admin@competir.pay",
+            sendType: "SEQUENTIAL",
             apiVersion: 3,
             enabled: true,
             interrupted: false,
