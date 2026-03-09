@@ -220,7 +220,7 @@ export async function registerAsaasWebhook(webhookUrl: string) {
             name: "Competir.pay Webhook",
             url: webhookUrl,
             email: "admin@competir.pay",
-            sendType: "SEQUENTIAL",
+            sendType: "SEQUENTIALLY",
             apiVersion: 3,
             enabled: true,
             interrupted: false,
