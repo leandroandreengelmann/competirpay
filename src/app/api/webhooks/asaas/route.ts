@@ -24,8 +24,13 @@ export async function POST(request: Request) {
         const eventType = payload.event;
         const payment = payload.payment;
 
+        // Diagnostic Logging for Vercel
+        console.log(`Asaas Webhook: Received event ${eventType} for payment ${payment?.id || 'none'}`);
+
+        // Handle Asaas "Ping" or validation - if it's a test or doesn't have payment data yet
         if (!payment || !payment.id) {
-            return NextResponse.json({ error: "Invalid payload: Missing payment" }, { status: 400 });
+            console.log("Asaas Webhook: Identification ping or empty payload received. Returning 200.");
+            return NextResponse.json({ success: true, message: "Ping received" });
         }
 
         // 3. Update dashboard last webhook status
