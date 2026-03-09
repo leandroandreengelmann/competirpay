@@ -111,7 +111,7 @@ export default function AsaasSettingsClient({ initialData }: { initialData: any 
                 alert("Webhook registrado no Asaas com sucesso!");
             } else {
                 setWebhookStatus("Erro ao registrar");
-                alert("Erro ao registrar Webhook: " + res.error);
+                alert("Erro ao registrar Webhook: " + (res.error || res.message || "Erro desconhecido"));
             }
         });
     };

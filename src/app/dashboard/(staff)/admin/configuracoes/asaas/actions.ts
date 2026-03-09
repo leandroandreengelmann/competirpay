@@ -177,7 +177,7 @@ export async function testAsaasConnection() {
             .eq("provider", "asaas");
 
         revalidatePath("/dashboard/admin/configuracoes/asaas");
-        return { success: isSuccess, message: msg };
+        return { success: isSuccess, message: isSuccess ? msg : undefined, error: !isSuccess ? msg : undefined };
     } catch (e: any) {
         const msg = e.message || "Erro inesperado ou Timeout";
         await supabase
@@ -270,7 +270,7 @@ export async function registerAsaasWebhook(webhookUrl: string) {
             .eq("provider", "asaas");
 
         revalidatePath("/dashboard/admin/configuracoes/asaas");
-        return { success: isSuccess, message: msg };
+        return { success: isSuccess, message: isSuccess ? msg : undefined, error: !isSuccess ? msg : undefined };
     } catch (e: any) {
         const msg = e.message || "Erro inesperado";
         await supabase
